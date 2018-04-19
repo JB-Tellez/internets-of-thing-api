@@ -41,12 +41,12 @@ app.post('/api/v1/things', (req, res) => {
     .catch(err => res.status(500).send('ruh roh'));
 });
 
-app.put('/api/v1/things', (req, res) => {
+app.put('/api/v1/things/:id', (req, res) => {
 
     client.query(`
         UPDATE things 
         SET name='${req.body.name}' 
-        WHERE id=${req.body.id};
+        WHERE id=${req.params.id};
     `)
     .then(results => res.sendStatus(200))
     .catch(err => res.status(500).send('ruh roh'));
