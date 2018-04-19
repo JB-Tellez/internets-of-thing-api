@@ -12,10 +12,18 @@ client.connect();
 
 app.get('/api/v1/things', async (req, res) => {
     
-    client.query('SELECT * FROM things')
+    client.query('SELECT * FROM things;')
         .then(results => res.send(results.rows))
         .catch(err => res.status(500).send('ruh roh'));
 
-})
+});
+
+app.get('/api/v1/things/:id', async (req, res) => {
+    
+    client.query(`SELECT * FROM things WHERE id=${req.params.id};`)
+        .then(results => res.send(results.rows[0]))
+        .catch(err => res.status(500).send('ruh roh'));
+
+});
 
 app.listen(PORT, () => console.log('Listening on PORT', PORT));
