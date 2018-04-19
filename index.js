@@ -1,6 +1,7 @@
 require('dotenv').config();
 
 const express = require('express');
+const cors = require('cors');
 
 const PORT = process.env.PORT;
 const pg = require('pg');
@@ -10,6 +11,7 @@ const app = express();
 const client = new pg.Client(process.env.DATABASE_URL);
 client.connect();
 
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 
